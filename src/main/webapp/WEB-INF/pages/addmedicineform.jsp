@@ -23,7 +23,7 @@
 
     <script
             src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/commonLayout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonLayout.css">
 </head>
 <body>
 <c:import var="sidebar" url="sidebar.jsp" />
@@ -52,7 +52,7 @@ ${sidebar}
                                 name="categoryName" id="categoryName" class="form-control">
                             <c:forEach var="categoryBean"
                                        items="${categorydao}">
-                                ${categorydao}
+                                <h1><c:out value="categoryBean"/>haha</h1>
                                 <c:if test="${not empty mbean}">
                                     <c:if test="${mbean.getCatId()==categoryBean.getCatId()}">
                                         <c:set var="isselected" value="selected" />

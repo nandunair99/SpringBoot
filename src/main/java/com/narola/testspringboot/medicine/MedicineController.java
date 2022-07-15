@@ -37,9 +37,9 @@ public class MedicineController {
 
     @GetMapping("/showMedicineForm")
     public ModelAndView showMedicineForm() {
-        List<Category> categorydao = (List<Category>) categoryRepository.findAll();
+        List<Category> categoryList = (List<Category>) categoryRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("addmedicineform");
-        modelAndView.addObject(categorydao);
+        modelAndView.addObject("categorydao",categoryList);
         return modelAndView;
     }
 
