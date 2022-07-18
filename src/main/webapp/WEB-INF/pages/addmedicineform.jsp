@@ -7,6 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
+<%@ page import="com.narola.testspringboot.utility.Constant" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,19 +50,19 @@ ${sidebar}
                     <td>
                         <div class="form-group">
                             <label for="categoryName">Category Name:</label> <select
-                                name="categoryName" id="categoryName" class="form-control">
+                                name="category" id="categoryName" class="form-control">
                             <c:forEach var="categoryBean"
                                        items="${categorydao}">
                                 <h1><c:out value="categoryBean"/>haha</h1>
                                 <c:if test="${not empty mbean}">
-                                    <c:if test="${mbean.getCatId()==categoryBean.getCatId()}">
+                                    <c:if test="${mbean.getCatId()==categoryBean.getCatID()}">
                                         <c:set var="isselected" value="selected" />
                                     </c:if>
-                                    <c:if test="${mbean.getCatId()!=categoryBean.getCatId()}">
+                                    <c:if test="${mbean.getCatId()!=categoryBean.getCatID()}">
                                         <c:set var="isselected" value="" />
                                     </c:if>
                                 </c:if>
-                                <option value="${categoryBean.getCatId()}" ${isselected}>${categoryBean.getCatName()}</option>
+                                <option value="${categoryBean.getCatID()}">${categoryBean.getCatName()}</option>
 
                             </c:forEach>
 
@@ -73,7 +74,7 @@ ${sidebar}
                     <td>
                         <div class="form-group">
                             <label for="medNametxt">Medicine Name:</label> <input
-                                type="text" class="form-control" name="medNametxt"
+                                type="text" class="form-control" name="medicineName"
                                 id="medNametxt" placeholder="Enter medicine name..."
                                 value="${mbean.getMedName()}">
                         </div>
@@ -83,15 +84,14 @@ ${sidebar}
                     <td>
                         <div class="form-group">
                             <label for="medPricetxt">Price:</label>
-                            <c:if test="${mbean.getMedPrice()==-1.0}">
-                                <c:set var="price" value="" />
-                            </c:if>
-                            <c:if test="${mbean.getMedPrice()!=-1.0}">
-                                <c:set var="price" value="${mbean.getMedPrice()}" />
-                            </c:if>
-                            <input type="text" class="form-control" name="medPricetxt"
-                                   id="medPricetxt" placeholder="Enter medicine price..."
-                                   value="${price}">
+<%--                            <c:if test="${mbean.getMedPrice()==-1.0}">--%>
+<%--                                <c:set var="price" value="" />--%>
+<%--                            </c:if>--%>
+<%--                            <c:if test="${mbean.getMedPrice()!=-1.0}">--%>
+<%--                                <c:set var="price" value="${mbean.getMedPrice()}" />--%>
+<%--                            </c:if>--%>
+                            <input type="text" class="form-control" name="cost"
+                                   id="medPricetxt" placeholder="Enter medicine price...">
                         </div>
                     </td>
                 </tr>
@@ -115,7 +115,7 @@ ${sidebar}
                     <td>
                         <div class="form-group">
                             <label for="medManufacturertxt">Manufacturer:</label> <input
-                                type="text" class="form-control" name="medManufacturertxt"
+                                type="text" class="form-control" name="manufacturer"
                                 id="medManufacturertxt"
                                 placeholder="Enter manufacturer name..."
                                 value="${mbean.getMedManufacturer()}">
@@ -126,7 +126,7 @@ ${sidebar}
                     <td>
                         <div class="form-group">
                             <label for="medDescriptiontxt">Medicine Description:</label>
-                            <textarea name="medDescriptiontxt" id="medDescriptiontxt">${mbean.getMedDescription()}</textarea>
+                            <textarea name="description" id="medDescriptiontxt">${mbean.getMedDescription()}</textarea>
                         </div>
                     </td>
                 </tr>
@@ -137,7 +137,7 @@ ${sidebar}
                             <c:set var="mfg" value="${mbean.getMedMfgDate()}" />
                             <c:set var="exp" value="${mbean.getMedExpDate()}" />
 
-                            <input type="date" name="medMfgDatetxt" id="medMfgDatetxt"
+                            <input type="date" name="mfgDate" id="medMfgDatetxt"
                                    value="${mfg}">
                         </div>
                     </td>
@@ -146,7 +146,7 @@ ${sidebar}
                     <td>
                         <div class="form-group">
                             <label for="medExpDatetxt">Exp date:</label> <input type="date"
-                                                                                name="medExpDatetxt" id="medExpDatetxt" value="${exp}">
+                                                                                name="expDate" id="medExpDatetxt" value="${exp}">
                         </div>
                     </td>
                 </tr>
@@ -169,15 +169,15 @@ ${sidebar}
                             <c:if test="${empty mbean}">
                                 <c:set var="qty" value="1" />
                             </c:if>
-                            <input type="number" name="quantitytxt" id="quantitytxt" min="1"
+                            <input type="number" name="quantity" id="quantitytxt" min="1"
                                    value="${qty}">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan=2><c:if test="${not empty errMsg}">
-                        <h4 style="color: red">${errMsg}</h4>
-                    </c:if></td>
+                    <td colspan=2>
+                        <h4 style="color: red">error: <c:out value="${medicineErrors}"></c:out> </h4>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan=2><input type="submit" value="Add Medicine">

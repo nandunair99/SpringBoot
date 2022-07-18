@@ -14,15 +14,15 @@
   <title>Error</title>
 </head>
 <body>
-<center>
+
   <div class="wrapper">
     <div class="row errormsg">
-      <h1>Opps! something went wrong!</h1>
+      <h1>Oops! something went wrong...</h1>
     </div>
     <div class="row errorimg">
       <h3>${errormsg}</h3>
     </div>
   </div>
-</center>
+
 </body>
 </html>

@@ -50,6 +50,7 @@ public class MedicineController {
     {
         binder.addValidators(medicineValidator);
     }
+
     @GetMapping("/showMedicineForm")
     public ModelAndView showMedicineForm() {
         List<Category> categoryList = (List<Category>) categoryRepository.findAll();
@@ -71,15 +72,17 @@ public class MedicineController {
         medicine.setExpDate(LocalDate.now());
         medicine.setCreatedOn(LocalDateTime.now());
         medicine.setUpdatedOn(LocalDateTime.now());
-        Medicine med=repository.save(medicine);
+        //Medicine med=repository.save(medicine);
 
         Map<String, String> errorList = new HashMap<>();
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
             for (ObjectError e : errors
             ) {
-                errorList.put("medicineErrors",messageSource.getMessage(e.getCode(), null, Locale.getDefault()));
-                throw new ApplicationException("redirect:/showMedicineForm", errorList);
+                System.out.println(e.getCode().toString());
+                errorList.put("medicineErrors",messageSource.getMessage(e.getCode(),null,Locale.getDefault()));
+
+                throw new ApplicationException("addmedicineform", errorList);
             }
         }
         return ResponseEntity.ok("Medicine Added");

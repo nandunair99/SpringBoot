@@ -22,16 +22,16 @@ public class MedicineValidator implements Validator {
     public void validate(Object target, Errors errors) {
             Medicine medicine=(Medicine)target;
             ValidationUtils.rejectIfEmptyOrWhitespace(errors,"medicineName","medicine.name.empty");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors,"cost","medicine.price.empty");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors,"discount","medicine.discount.empty");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors,"medMfgDate","medicine.mfgdate.empty");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors,"medExpDate","medicine.expdate.empty");
+            //ValidationUtils.rejectIfEmptyOrWhitespace(errors,"cost","medicine.price.empty");
+            //ValidationUtils.rejectIfEmptyOrWhitespace(errors,"discount","medicine.discount.empty");
+            //ValidationUtils.rejectIfEmptyOrWhitespace(errors,"mfgDate","medicine.mfgdate.empty");
+            //ValidationUtils.rejectIfEmptyOrWhitespace(errors,"expDate","medicine.expdate.empty");
 
-            if(medicine.getCost()<0)
+            if(medicine.getCost()<=0.0)
             {
                 errors.rejectValue("cost","medicine.price.invalid");
             }
-            if(medicine.getDiscount()<0)
+            if(medicine.getDiscount()<=0.0)
             {
                 errors.rejectValue("discount","medicine.discount.invalid");
             }
