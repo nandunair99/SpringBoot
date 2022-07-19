@@ -1,6 +1,8 @@
 package com.narola.testspringboot.medicine;
 
 import com.narola.testspringboot.category.repository.CategoryRepository;
+import com.narola.testspringboot.email.service.IMailService;
+import com.narola.testspringboot.email.service.model.EmailDetails;
 import com.narola.testspringboot.medicine.repository.MedicineRepository;
 import com.narola.testspringboot.medicine.validation.MedicineValidator;
 import com.narola.testspringboot.model.Category;
@@ -41,6 +43,12 @@ public class MedicineController {
     MedicineValidator medicineValidator;
     @Autowired
     MessageSource messageSource;
+
+    @Autowired
+    EmailDetails emailDetails;
+
+    @Autowired
+    IMailService mailService;
 //    @Autowired
 //    @Qualifier("defaultViewResolver")
 //    private InternalResourceViewResolver internalResourceViewResolver;
@@ -92,5 +100,11 @@ public class MedicineController {
         dbHelper.getName();
         return ResponseEntity.ok(dbHelper.getName()+" "+dbHelper.getType());
     }
+    @GetMapping("/mailTest")
+    public ResponseEntity<String> mailTest() {
+       mailService.sendSimpleMail();
+        return ResponseEntity.ok("mail sent successflly");
+    }
+
 
 }
